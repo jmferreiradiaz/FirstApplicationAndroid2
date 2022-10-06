@@ -1,12 +1,8 @@
 package com.example.firstapplication
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
-import android.view.View
-import android.view.View.OnClickListener
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -51,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         // Página suma (home)
         val btnSuma = findViewById<Button>(R.id.btnSuma)
         btnSuma.setOnClickListener {onClickSuma() }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -65,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    //  Evenos en la página Home
+    //  Eventos en la página Home
     private fun onClickSuma() {
         val num1 = Integer.parseInt(findViewById<TextView>(R.id.editTextNumber1).text.toString())
         val num2 = Integer.parseInt(findViewById<TextView>(R.id.editTextNumber2).text.toString())

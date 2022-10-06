@@ -11,4 +11,5 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_changecolor">Cambio de Color</string>
+    <string name="menu_aligntext">Alinea el texto</string>
 </resources>

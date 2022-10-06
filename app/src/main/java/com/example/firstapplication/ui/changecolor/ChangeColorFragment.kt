@@ -1,65 +1,53 @@
 package com.example.firstapplication.ui.changecolor
 
+import android.graphics.Color
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.viewbinding.ViewBindings
 import com.example.firstapplication.R
-import com.example.firstapplication.databinding.FragmentChangecolorBinding
-import com.example.firstapplication.ui.home.ChangeColorViewModel
 
 class ChangeColorFragment : Fragment() {
 
-    private var _binding: FragmentChangecolorBinding? = null
+    companion object {
+        fun newInstance() = ChangeColorFragment()
+        private const val TAG = "ChangeColorFragment"
+    }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var viewModel: ChangeColorViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(ChangeColorViewModel::class.java)
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_changecolor, container, false)
 
-        _binding = FragmentChangecolorBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val btnBlue = view.findViewById<Button>(R.id.btnAzul)
+        val btnRed = view.findViewById<Button>(R.id.btnRojo)
+        val btnGreen = view.findViewById<Button>(R.id.btnVerde)
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        btnBlue.setOnClickListener { onClickChangeColor(btnBlue, view) }
+        btnRed.setOnClickListener {onClickChangeColor(btnRed, view) }
+        btnGreen.setOnClickListener {onClickChangeColor(btnGreen, view) }
 
-        // Página changecolor
-        /*val btnBlue = getView().findViewById<Button>(R.id.btnAzul)
-        btnBlue.setOnClickListener {onClickChangeColor(btnBlue) }
-
-        val btnRed = findViewById<Button>(R.id.btnAzul)
-        btnRed.setOnClickListener {onClickChangeColor(btnRed) }
-
-        val btnGreen = findViewById<Button>(R.id.btnAzul)
-        btnBlue.setOnClickListener {onClickChangeColor(btnGreen) }*/
-
-        return root
+        return view
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(ChangeColorViewModel::class.java)
+        // TODO: Use the ViewModel
     }
 
-    //  Eventos en la página Changecolor
-    /*private fun onClickChangeColor(btn: Button) {
-        val text = findViewById<EditText>(R.id.editTextTexto)
-        text.setTextColor(btn.textColors);
-    }*/
-
+    private fun onClickChangeColor(btn: Button, view: View) {
+        val text = view.findViewById<EditText>(R.id.editTextTexto)
+        if(btn.text.equals("AZUL")) text.setTextColor(Color.BLUE);
+        if(btn.text.equals("ROJO")) text.setTextColor(Color.RED);
+        if(btn.text.equals("VERDE")) text.setTextColor(Color.GREEN);
+    }
 }
